@@ -190,7 +190,7 @@ public class Utility {
         String triplestore = properties.getProperty("Triplestore");
         if (triplestore.equalsIgnoreCase("fuseki")) {
             log.info("Fuseki triplestore is selected");
-            return FusekiStorage.getInstance();
+            return FusekiStorage.getInstance(properties.getProperty("FusekiBinariesDir"));
         } else if (triplestore.equalsIgnoreCase("virtuoso")) {
             log.info("Virtuoso triplestore is selected");
             return VirtuosoStorage.getInstance();

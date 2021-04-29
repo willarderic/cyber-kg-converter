@@ -191,6 +191,7 @@ public class CVEParser implements Parser {
         log.info("Downloading resource from internet...  ");
         String cvefileName = cveUrlYear.substring(cveUrlYear.lastIndexOf("/") + 1);
         String destCVEFile = destDir + "/" + cvefileName;
+        log.info("CVE DOWNLOAD URL: " + cveUrlYear + " | " + destCVEFile);
         String CVEZipFile = DownloadUnzip.downloadResource(cveUrlYear, destCVEFile);
         log.info("Downloading resource Done!");
 

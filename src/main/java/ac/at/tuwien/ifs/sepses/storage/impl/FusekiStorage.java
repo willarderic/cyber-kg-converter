@@ -2,7 +2,6 @@ package ac.at.tuwien.ifs.sepses.storage.impl;
 
 import ac.at.tuwien.ifs.sepses.storage.Storage;
 import ac.at.tuwien.ifs.sepses.storage.tool.StorageHelper;
-import com.sun.javafx.PlatformUtil;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,8 +14,10 @@ public enum FusekiStorage implements Storage {
     INSTANCE();
 
     private static final Logger log = LoggerFactory.getLogger(FusekiStorage.class);
+    private static String fusekiBinariesDir;
 
-    public static FusekiStorage getInstance() {
+    public static FusekiStorage getInstance(String dir) {
+        fusekiBinariesDir = dir;
         return INSTANCE;
     }
 
@@ -32,9 +33,9 @@ public enum FusekiStorage implements Storage {
 
         try {
             log.info("storing " + filename + " started");
-            if (PlatformUtil.isWindows())
-                filename = filename.replaceAll("/", "\\");
-            String command = "s-post " + endpoint + " " + namegraph + " " + filename;
+            filename = filename.replace("/", "\\");
+            log.info("FUSEKI BINARY DIRECTORY: " + fusekiBinariesDir);
+            String command[] = {"ruby", fusekiBinariesDir + "\\s-post", endpoint, namegraph, filename };
             Process process = Runtime.getRuntime().exec(command);
             InputStream is = process.getInputStream();
             IOUtils.copy(is, System.out);
@@ -60,9 +61,8 @@ public enum FusekiStorage implements Storage {
 
         try {
             log.info("storing " + file + " started");
-            if (PlatformUtil.isWindows())
-                file = file.replaceAll("/", "\\");
-            String command = "s-put " + endpoint + " " + namegraph + " " + file;
+            file = file.replace("/", "\\");
+            String command[] = {"ruby", fusekiBinariesDir + "\\s-put", endpoint, namegraph, file };
             Process process = Runtime.getRuntime().exec(command);
             InputStream is = process.getInputStream();
             IOUtils.copy(is, System.out);
