@@ -229,11 +229,12 @@ public class CATTool {
 					                 "INSERT  {  ?s <http://w3id.org/sepses/vocab/ref/cat#hasCAPEC> ?cp."+
 					             		"}  " + 
 					             		"  WHERE { " + 
-					             		"    ?s <http://w3id.org/sepses/vocab/ref/cat#hasReference> ?ref." + 
-					             		"    ?ref <http://w3id.org/sepses/vocab/ref/cat#referenceName> 'capec'." +
-					             		"    ?ref <http://w3id.org/sepses/vocab/ref/cat#referenceId> ?refId."
-					             		+ " BIND (IRI(CONCAT('http://w3id.org/sepses/resource/capec/',?refId,'')) AS ?cp)" +
-					             		 		"  } ");
+												"?s <http://w3id.org/sepses/vocab/ref/cat#hasReference> ?ref ;" +
+												" <http://w3id.org/sepses/vocab/ref/cat#hasReference> ?ref2 ." +
+												"?ref2 <http://w3id.org/sepses/vocab/ref/cat#referenceName> 'capec' ." +
+												"?ref <http://w3id.org/sepses/vocab/ref/cat#referenceId> ?refId ." +
+					             				" BIND (IRI(CONCAT('http://w3id.org/sepses/resource/capec/',?refId,'')) AS ?cp)" +
+										"  } ");	
 							
 							
 							  UpdateRequest updateRequest7 = UpdateFactory.create(update7.toString());

@@ -159,7 +159,7 @@ public class CVEParserJson implements Parser {
         //CVEMetaModel.write(System.out);
         //System.exit(0);
         log.info("update Vulnerable Configuration links...");
-        //Linker.updateCveLinks(model);
+        Linker.updateCveLinks(model);
         CVETool.updateVulnerableConfigurationLinks(model);
        // CVETool.updateVulnerableConfigurationLinks2(model);
         log.info("update Logical Test links...");
